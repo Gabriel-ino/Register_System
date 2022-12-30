@@ -12,6 +12,7 @@ namespace Sistema_de_Cadastro.Data
         }
 
         public DbSet<ModelContact> Contacts { get; set; }
+        public DbSet<UserModel> Users { get; set; }
 
     }
 }

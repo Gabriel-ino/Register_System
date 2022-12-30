@@ -3,9 +3,16 @@
 
 // Write your JavaScript code.
 
-$(document).ready(function () {
-    $('#table-contacts').DataTable();
-});
+function setDataTable(id) {
+    $(id).DataTable();
+
+}
+
+$(document).ready(function() {
+
+    setDataTable('#table-contacts');
+    setDataTable("#table-users");
+})
 
 
 $('.close-alert').click(function () {

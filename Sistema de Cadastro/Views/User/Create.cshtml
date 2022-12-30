@@ -1,0 +1,51 @@
+﻿@model UserModel
+@using Sistema_de_Cadastro.Enums;
+
+@{
+    ViewData["Title"] = "Add User";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Add New User</h1>
+</div>
+
+<form asp-controller="User" asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" asp-for="Name" name="Name" class="form-control" placeholder="Enter name"/>
+        @Html.ValidationMessageFor(passed_user => passed_user.Name)
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" asp-for="Email" name="Email" class="form-control" placeholder="Enter email"/>
+        @Html.ValidationMessageFor(passed_user => passed_user.Email)
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="Login">Login</label>
+        <input type="text" asp-for="Login" name="Login" class="form-control" placeholder="Enter login"/>
+        
+    </div>
+
+    <div class="form-group">
+        <label for="profile" class="form-label">Profile</label>
+        <select asp-for="profile" class="form-control">
+            <option value="0">Select</option>
+            <option value="@ProfileEnum.Admin">Admin</option>
+            <option value="@ProfileEnum.Standard">Standard</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" asp-for="Password" name="Password" class="form-control" placeholder="Enter password" />
+        @Html.ValidationMessageFor(passed_user => passed_user.Password)
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a class="btn btn-secondary" asp-controller="Contact" asp-action="Index" role="button">Back</a>
+</form>
+
+

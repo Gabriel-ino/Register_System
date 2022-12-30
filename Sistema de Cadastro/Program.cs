@@ -11,6 +11,7 @@ var connectionString = builder.Configuration.GetConnectionString("Database");
 builder.Services.AddEntityFrameworkSqlServer().AddDbContext<BaseContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
