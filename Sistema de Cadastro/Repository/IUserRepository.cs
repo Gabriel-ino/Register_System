@@ -12,5 +12,9 @@ namespace Sistema_de_Cadastro.Repository
         UserModel Update(UserModel userModel);
 
         bool Delete(int id);
+
+        UserModel? GetByLogin(string login);
+
+
     }
 }

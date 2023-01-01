@@ -25,5 +25,10 @@ namespace Sistema_de_Cadastro.Models
 
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set;}
+
+        public bool VerifyPassword(string password)
+        {
+            return Password == password;
+        }
     }
 }

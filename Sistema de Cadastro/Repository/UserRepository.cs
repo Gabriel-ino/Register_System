@@ -69,5 +69,10 @@ namespace Sistema_de_Cadastro.Repository
         {
             return _baseContext.Users.ToList();
         }
+
+        public UserModel? GetByLogin(string login)
+        {
+            return _baseContext.Users.FirstOrDefault(user => user.Login.ToUpper() == login.ToUpper());
+        }
     }
 }
