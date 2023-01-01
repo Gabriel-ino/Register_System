@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Sistema_de_Cadastro.Models
 {
-    public class UserModel
+    public class EditUserModel
     {
         public int Id { get; set; }
 
@@ -17,13 +17,9 @@ namespace Sistema_de_Cadastro.Models
         [EmailAddress(ErrorMessage = "Please type a valid email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Select type of profile")]
+        [Required(ErrorMessage="Select type of profile")]
         public ProfileEnum? profile { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
-        public string Password { get; set; }
-
-        public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set;}
     }
 }

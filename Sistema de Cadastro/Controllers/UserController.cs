@@ -24,6 +24,18 @@ namespace Sistema_de_Cadastro.Controllers
             return View();
         }
 
+        public IActionResult Edit(int id)
+        {
+            UserModel userModel = _userRepository.GetById(id);
+            return View(userModel);
+        }
+
+        public IActionResult VerifyDelete(int id)
+        {
+            UserModel userModel = _userRepository.GetById(id);
+            return View(userModel);
+        }
+
         [HttpPost]
         public IActionResult Create(UserModel model)
         {
@@ -39,6 +51,62 @@ namespace Sistema_de_Cadastro.Controllers
             }catch(Exception ex)
             {
                 TempData["ErrorMessage"] = $"Contact creation was failed, try again\nDetails: {ex}";
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                bool verifyDelete = _userRepository.Delete(id);
+                if (verifyDelete)
+                {
+                    TempData["SuccessMessage"] = "Successfully deleted user!";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Something went wrong";
+                }
+
+                return RedirectToAction("Index");
+
+            } catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Something went wrong\nDetails: {ex}";
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        public IActionResult Change(EditUserModel toUpdateUser)
+        {
+            try
+            {
+                UserModel? userWithPasword = null;
+                UserModel onDatabaseUser = _userRepository.GetById(toUpdateUser.Id);
+                if (ModelState.IsValid)
+                {
+                    userWithPasword = new UserModel()
+                    {
+                        Id = toUpdateUser.Id,
+                        Name = toUpdateUser.Name,
+                        Email = toUpdateUser.Email,
+                        Login = toUpdateUser.Login,
+                        profile = toUpdateUser.profile,
+                        Password = onDatabaseUser.Password,
+                    };
+                    _userRepository.Update(userWithPasword);
+                    TempData["SuccessMessage"] = "Updated Successfully";
+                    
+                    return RedirectToAction("Index");
+                }
+                return View(userWithPasword);
+
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Something went wrong\nDetails: {ex}";
                 return RedirectToAction("Index");
             }
         }
